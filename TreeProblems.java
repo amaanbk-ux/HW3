@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Amaan Khan / 001 ***
  *
  * This java file contains several simple tree problems that need to be
  * codified. These routines  must use the TreeMap and TreeSet library
@@ -20,14 +20,18 @@ public class TreeProblems {
    */
   
   public static Set<Integer> different(Set<Integer> setA, Set<Integer> setB) {
+  TreeSet<Integer> commonE = new TreeSet<Integer>(setA);
 
-    // INSERT CODE HERE - DO NOT FORGET TO PLACE YOUR NAME ABOVE
-    //
-    // This can be done numerous ways, but once such will only that
-    // *several* lines of code. Hint: create two temporary TreeSets and utilize the
-    // methods retainAll(), addAll(), and removeAll(). But in the end, get something to work.
+  commonE.retainAll(setB);
 
-    return setA;
+  TreeSet<Integer> treeResult = new TreeSet<Integer>(setA);
+
+  treeResult.addAll(setB);
+
+  treeResult.removeAll(commonE);
+
+
+    return treeResult;
   }
 
 
@@ -39,10 +43,18 @@ public class TreeProblems {
    */
 
   public static void removeEven(Map<Integer, String> treeMap) {
+  ArrayList<Integer> keys = new ArrayList<Integer>();
 
-    // INSERT CODE HERE.
+  for(Map.Entry<Integer, String> mapElement : treeMap.entrySet()){
+    int k = (int) mapElement.getKey();
+    if (k % 2 == 0){
+      keys.add(k);
+    }
+  }
+  for (Integer k : keys){
+    treeMap.remove(k);
+  }
 
-    return;
   }
 
 
@@ -53,12 +65,22 @@ public class TreeProblems {
    * return a boolean value indicating if the two trees are equal or not.
    */
 
-  public boolean treesEqual(Map<Integer, String> tree1,Map<Integer, String> tree2 ) {
+  public boolean treesEqual(Map<Integer, String> tree1, Map<Integer, String> tree2) {
 
-    // INSERT CODE HERE
+    if (tree1.size() != tree2.size()) {
+      return false;
+    }
+    for (Map.Entry<Integer, String> mapElement : tree1.entrySet()) {
+      int key = (int) mapElement.getKey();
+      String tree1Value = mapElement.getValue();
+      String tree2Value = tree2.get(key);
 
-    return false;
+      if (!tree1Value.equals(tree2Value)) {
+        return false;
+      }
+    }
 
+    return true;
   }
 
 } // end treeProblems class
